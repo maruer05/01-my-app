@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      APP IOT HOME prueba1
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,6 +9,34 @@
 <ion-content [fullscreen]="true" class="ion-padding">
  
 
-<h1>Mensaje al ServerSocket</h1>
+<h1>Luces</h1>
+<!-- funciona 
 <input type="text" name="txt"  [(ngModel)]="message" (keyup.enter)="sendToServer($event)">
+-->
+
+<div class="ion-padding">
+<!-- Toggles in a List -->
+<ion-list>
+  <ion-item>
+    <ion-label>Dormitorio</ion-label>
+    <ion-toggle [(ngModel)]="Dormitorio" (ionChange)="sendToServer($event)"> </ion-toggle>
+  </ion-item>
+<h1 *ngIf="Dormitorio"> Enc</h1>
+  <ion-item>
+    <ion-label>Sala</ion-label>
+    <ion-toggle [(ngModel)]="Sala"></ion-toggle>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Garage</ion-label>
+    <ion-toggle [(ngModel)]="Garage"></ion-toggle>
+  </ion-item>
+</ion-list>
+
+</div>
+
 </ion-content>
+
+
+
+

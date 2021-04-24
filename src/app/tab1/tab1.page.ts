@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { webSocket } from "rxjs/webSocket";
 
+
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -8,36 +10,49 @@ import { webSocket } from "rxjs/webSocket";
 })
 export class Tab1Page implements OnInit {
 
-  subject = webSocket('ws://8266esp:81');
-  message = 'hello';
-  
+  subject = webSocket('ws://192.168.1.104:81');
+  message:string = 'hello';
+  public Dormitorio: boolean;
+  datoEsp:number;
+ 
 
-  constructor(
+  constructor( 
     
   ) {}
-    
+  
   
   ngOnInit(){
     console.log('hola mundo');
-    this.listentoWebsocket();
- 
+    // Recibir mensajes
+    this.subject.subscribe(mensaje => console.log(mensaje));
   }
-
- 
 
   sendToServer($event){
     this.subject.subscribe();
-    this.subject.next(this.message);
-    this.subject.complete();
+    console.log(this.Dormitorio);
+    this.subject.next("LED");
+   // this.subject.next(this.message);
+   
+   if(this.Dormitorio == true){
+    this.datoEsp = 1; //ENCENDIDO
+    this.subject.next(this.datoEsp);
+   }
+
+   else {
+    this.datoEsp = 0; //apagado
+    this.subject.next(this.datoEsp);
+   }
+  
+   if(this.message == "ON"){
+     this.datoEsp = 1; //ENCENDIDO
+     this.subject.next(this.datoEsp);
+   }
+   else if (this.message == "OFF"){
+    this.datoEsp = 0; //apagado
+    this.subject.next(this.datoEsp);
+   }
+    
+   // this.subject.complete();
     this.subject.error({code: 4000, reason: 'I think our app just broke!'});
   }
-
-  listentoWebsocket(){
-    this.subject.subscribe(
-      msg => console.log('message received: ' + msg), // Called whenever there is a message from the server.
-      err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-      () => console.log('complete') // Called when connection is closed (for whatever reason).
-    );
-  }
-
 }
