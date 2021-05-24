@@ -1,17 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header titulo="Mi Hogar"></app-header>
+<ion-content>
+  
+<!--
+  <ion-icon name="bed-outline"> habitacion</ion-icon>
+  <ion-icon name="car-sport-outline"></ion-icon>Garage
+  <ion-icon name="cafe-outline">Cocina</ion-icon>
+-->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<!--Esto es para que comience desde 1 el recorrido por json-->
+<ion-list >
+  <ion-item *ngFor="let y of websocketservice.chatMessages | slice:0; let i = index" [routerLink]="y.redirectTo" detail>
+    <ion-icon [name]="y.icon" slot="start" color="primary"></ion-icon>
+    {{y.name}}
+  </ion-item>
+</ion-list>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+<!-- Botones
+<ion-list *ngFor="let y of websocketservice.chatMessages | slice:0; let i = index"> 
+    <ion-item>
+      <ion-label> 
+        Posición:{{i}}   
+        Disp:{{y.name}} 
+      </ion-label>
+      <ion-toggle id="{{y.name}}" (ionChange)="sendWebsocket($event)"> </ion-toggle>
+    </ion-item>       
+</ion-list>
+
+-->
+
 </ion-content>

@@ -1,40 +1,26 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      APP IOT HOME prueba1
-    </ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-title class="ion-text-center">Bienvenido</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
- 
+<ion-content [fullscreen]="true" class="ion-padding align-center" >
+<div class="ion-padding-top">
+  <form>
+    <ion-item>
+      <div>
+        <ion-label >Introducir IP:</ion-label>
+        <ion-input type="text" [(ngModel)]="ip" name="ip"  ></ion-input>
+      </div>
+    </ion-item>
 
-<h1>Luces</h1>
-<!-- funciona 
-<input type="text" name="txt"  [(ngModel)]="message" (keyup.enter)="sendToServer($event)">
--->
-
-<div class="ion-padding">
-<!-- Toggles in a List -->
-<ion-list>
-  <ion-item>
-    <ion-label>Dormitorio</ion-label>
-    <ion-toggle [(ngModel)]="Dormitorio" (ionChange)="sendToServer($event)"> </ion-toggle>
-  </ion-item>
-<h1 *ngIf="Dormitorio"> Enc</h1>
-  <ion-item>
-    <ion-label>Sala</ion-label>
-    <ion-toggle [(ngModel)]="Sala"></ion-toggle>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Garage</ion-label>
-    <ion-toggle [(ngModel)]="Garage"></ion-toggle>
-  </ion-item>
-</ion-list>
-
-</div>
-
+    <div class="ion-text-center ion-margin-top-20">
+      <ion-button type="submit" (click)="logform()" block [routerLink]="['/tabs/tab2']" routerLinkActive="router-link-active">
+         Save
+      </ion-button>
+    </div>
+    </form>
+</div>      
 </ion-content>
 
 

@@ -1,0 +1,42 @@
+<ion-header>
+  <!-- Viejo toolbar
+<ion-toolbar class="padding-top">
+      <ion-title class="ion-text-capitalize">
+        <ion-icon name="home" color="tertiary"></ion-icon>
+        {{titulo}} 
+        <div class="ion-float-right">
+          <ion-button (click)="goBack()" size="small">
+            <ion-icon md="arrow-back" slot="end"></ion-icon>
+            Back
+          </ion-button>   
+        </div> 
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-menu-button auto-hide="false"></ion-menu-button>
+      </ion-buttons>  
+      </ion-title>     
+   </ion-toolbar>
+  -->
+  
+
+
+   <ion-toolbar color="tertiary">
+
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" (click)="goBack()">
+      <ion-icon md="arrow-back">Back</ion-icon>  
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">{{titulo}}</ion-title>
+  </ion-toolbar>
+
+</ion-header>
