@@ -20,19 +20,19 @@ export class GaragePage implements OnInit, OnDestroy {
     this.websocketservice.openWebsocket();
 
     this.variable = this.websocketservice.chatMessages;
-    console.log('variablegarage',this.variable);
+    //console.log('variablegarage',this.variable);
     
     this.variable.map(resp => console.log(resp));
     
     for( let messagesChat1 of Object.values(this.variable)){
-      console.log('nuevoFordeGarage', messagesChat1);
+     //console.log('nuevoFordeGarage', messagesChat1);
        
      
       //preguntar esto 
       if(messagesChat1.name === "garage"){
         this.bandera = true;
         for( let messagesChat2 of Object.values(messagesChat1.acciones)){
-          console.log('nuevoFordeGarage2', messagesChat2);
+        //  console.log('nuevoFordeGarage2', messagesChat2);
           this.acciones.push(messagesChat2);
         }
       }

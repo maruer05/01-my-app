@@ -25,19 +25,19 @@ export class CocinaPage implements OnInit {
     this.websocketservice.openWebsocket();
 
     this.variable = this.websocketservice.chatMessages;
-    console.log('variablecocina',this.variable);
+    //console.log('variablecocina',this.variable);
     
     this.variable.map(resp => console.log(resp));
     
     for( let messagesChat1 of Object.values(this.variable)){
-      console.log('nuevoFordeCocina1', messagesChat1);
+      //console.log('nuevoFordeCocina1', messagesChat1);
        
      
       //preguntar esto 
       if(messagesChat1.name === "cocina"){
         this.bandera = true;
         for( let messagesChat2 of Object.values(messagesChat1.acciones)){
-          console.log('nuevoFordeCocina2', messagesChat2);
+          //console.log('nuevoFordeCocina2', messagesChat2);
           this.acciones.push(messagesChat2);
         }
       }
@@ -53,6 +53,7 @@ export class CocinaPage implements OnInit {
   }
 
   sendWebsocket($event){
+    console.log('event',$event);
     console.log($event.path[0].id);
     console.log('$event',$event.detail.value);
     let ubicado = $event.detail.value;

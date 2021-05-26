@@ -8,22 +8,15 @@ import { Lugare } from './models/chatMessageDto';
 export class ApiarduinoServiceService implements OnInit{
 
   websocket: WebSocket;
-  
-
   public chatMessages:Lugare[] = [];
   public IPdireccion:string ='';
   bandera:boolean = false;
   activatedLED: boolean = false;
 
 
-  constructor(
-    
-  ) { }
+  constructor() { }
 
-  ngOnInit(){
-  
-      
-  }
+  ngOnInit(){}
 
 public openWebsocket(){
   this.websocket = new WebSocket(`ws://${this.IPdireccion}:81`);
@@ -42,21 +35,19 @@ public openWebsocket(){
    console.log("mensaje JSON.PARSE:");
    var messages = JSON.parse(event1.data); 
    console.log('messages',messages);
-   console.log("interface");
+  /// console.log("interface");
    
    for (let dato of Object.values(messages)){
-    //console.log('dato1', dato );
+    //console.log('dato', dato );
     for (let value of  Object.values(dato)){
-      //console.log('dato2', value);
-
+     // console.log('value', value);
       for( let otro of Object.values(value)){
        // console.log('dato3', otro);
       }
-
      // console.log('value.name',value.name);
 
      for( let nuevoFor of Object.values(this.chatMessages)){
-       // console.log('nuevoFor', nuevoFor);
+       //console.log('nuevoFor', nuevoFor);
         if( value.name === nuevoFor.name){
          this.bandera = true;
         }
@@ -81,54 +72,44 @@ public openWebsocket(){
 }
 // el error se da porque tengo que enviar de vuelta un JSON y no un string
 hola:string; 
+guardar:Lugare[] = [];
 
 public sendMessage(ubicado,eventoId){
 
   console.log('sendMessage',ubicado);
   console.log('sendMessage', eventoId);
-/*
-  this.chatMessages.map( dato => {
-    if(dato.name == eventoId){
-      console.log('datostatus',dato.status);
-      if( dato.status === "ON"){
-          dato.status = "OFF";
-      }      
-      else{
-        dato.status = "ON";
-      }
-     
-      this.hola=`{\"dispositivos\":[{\"name\": \"${eventoId}\", \"status\": \"${dato.status}\"}]}`;
-      
-    }  
-    return dato;
-  });*////
-
   this.chatMessages.map(dato => {
     if(dato.name===ubicado){
-    
       dato.acciones.map( accion => 
         {
           if(accion.ID === eventoId){
               if(accion.status === "ON"){
                 accion.status = "OFF";
-                this.activatedLED = false
+                this.activatedLED = false;
+               
               }
               else{
                 accion.status = "ON";
                 this.activatedLED = true;
               }     
           }
-          console.log('accion',accion);
+          
+          console.log('accionSendMenssage',accion);
+          return accion.status;
+          
         } 
      
       )
+      this.websocket.send(JSON.stringify(dato.name));
+      this.websocket.send(JSON.stringify(dato.acciones));
     }
-    this.websocket.send(JSON.stringify(dato));
+    //console.log('datoenviado', dato);
+    // this.websocket.send(JSON.stringify(dato.acciones));
     return dato;
     
   })
- 
-  console.log('chatmessages:',(this.chatMessages));
+ // this.websocket.send(JSON.stringify(this.chatMessages));
+ // console.log('chatmessages:',(this.chatMessages));
  // console.log('hola:', (this.hola));
  // this.websocket.send(this.hola);  
 }

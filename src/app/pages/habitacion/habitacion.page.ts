@@ -19,19 +19,19 @@ export class HabitacionPage implements OnInit, OnDestroy {
     this.websocketservice.openWebsocket();
 
     this.variable = this.websocketservice.chatMessages;
-    console.log('variableHAB',this.variable);
+    //console.log('variableHAB',this.variable);
     
     this.variable.map(resp => console.log(resp));
     
     for( let messagesChat1 of Object.values(this.variable)){
-      console.log('nuevoFordeHAB', messagesChat1);
+     // console.log('nuevoFordeHAB', messagesChat1);
        
      
       //preguntar esto 
       if(messagesChat1.name === "habitacion"){
         this.bandera = true;
         for( let messagesChat2 of Object.values(messagesChat1.acciones)){
-          console.log('nuevoFordeHAB2', messagesChat2);
+         // console.log('nuevoFordeHAB2', messagesChat2);
           this.acciones.push(messagesChat2);
         }
       }

@@ -7,7 +7,7 @@ export interface Lugare {
     icon:       string;
     redirectTo: string;
     acciones:   info[];
-  }
+}
   
 export interface info {
     ID:     string;
