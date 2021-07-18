@@ -23,7 +23,8 @@ ngOnInit(){
 logform(){
   console.log('entra en el logform'); 
   console.log(this.ip);
-  this.websocketS.ipdatoform(this.ip);
+  window.localStorage['IP'] = this.ip; //solo puede almacenar texto
+  //this.websocketS.ipdatoform(this.ip);
 }
 
 }
