@@ -34,10 +34,11 @@ export class Tab2Page implements OnInit, OnDestroy {
   }
 
   ngOnInit(){
+
     this.websocketservice.openWebsocket();
   }
 
   ngOnDestroy(){
-   //this.websocketservice.closeWebsocket();
+    //this.websocketservice.closeWebsocket();
   }
 }

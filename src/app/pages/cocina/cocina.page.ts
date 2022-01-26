@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiarduinoServiceService } from 'src/app/apiarduino-service.service';
 import { info, Lugare } from 'src/app/models/chatMessageDto';
 
+
 @Component({
   selector: 'app-cocina',
   templateUrl: './cocina.page.html',
@@ -32,7 +33,7 @@ export class CocinaPage implements OnInit {
 
     for (let messagesChat1 of Object.values(this.variable)) {
 
-      if (messagesChat1.name === "cocina") {
+      if (messagesChat1.name === "Cocina") {
         this.bandera = true;
         for (let messagesChat2 of Object.values(messagesChat1.acciones)) {
           this.acciones.push(messagesChat2);
@@ -50,6 +51,7 @@ export class CocinaPage implements OnInit {
     console.log('event', $event);
     console.log($event.path[0].id);
     console.log('$event', $event.detail.value);
+
     let ubicado = $event.detail.value;
     let eventoId = $event.path[0].id
 

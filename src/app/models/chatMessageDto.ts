@@ -12,5 +12,6 @@ export interface Lugare {
 export interface info {
     ID:     string;
     status: string;
+    MAC: string;
 }
 

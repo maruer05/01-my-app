@@ -1,17 +1,29 @@
 <app-header titulo="Habitación"></app-header>
 <ion-content>
- <ion-list *ngFor="let y of acciones | slice:0; let i = index"> 
-    <ion-item *ngIf="y.status == 'ON'">
-      <ion-label>   
-        {{y.ID}} {{y.status}}
-      </ion-label>
-      <ion-toggle id="{{y.ID}}" value="habitacion" (ionChange)="sendWebsocket($event)" checked> </ion-toggle>
-    </ion-item>       
-    <ion-item *ngIf="y.status == 'OFF'">
-      <ion-label>   
-        {{y.ID}} {{y.status}}
-      </ion-label>
-      <ion-toggle id="{{y.ID}}" value="habitacion" (ionChange)="sendWebsocket($event)"> </ion-toggle>
-    </ion-item> 
-</ion-list>
+
+  <ion-card color="light">
+    <ion-grid >
+      <ion-list *ngFor="let y of acciones | slice:0; let i = index "> 
+        <ion-item *ngIf="y.status == 'ON'">
+          <ion-label>   
+            
+            <h2>{{y.ID }} </h2>
+            
+            <!--{{y.status}} // {{y.MAC}}--> 
+          </ion-label>
+          <ion-toggle id="{{y.ID}}"  value="Habitación" (ionChange)="sendWebsocket($event)" checked></ion-toggle>
+        </ion-item>      
+        <ion-item *ngIf="y.status == 'OFF'">
+          <ion-label>   
+            <h2>{{y.ID }} </h2>
+         
+            <!--{{y.status}} // {{y.MAC}}--> 
+          </ion-label>
+          <ion-toggle id="{{y.ID}}"  value="Habitación" (ionChange)="sendWebsocket($event)"> </ion-toggle>
+        </ion-item>    
+    </ion-list>
+      
+    </ion-grid>
+</ion-card>
+  
 </ion-content>

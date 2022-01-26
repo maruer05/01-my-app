@@ -1,6 +1,6 @@
 import { Injectable, Input, OnInit } from '@angular/core';
 import { Lugare } from './models/chatMessageDto';
-
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,14 @@ export class ApiarduinoServiceService implements OnInit {
   leer: string;
 
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { }
   ngOnInit() { }
 
   public openWebsocket() {
     var DireccionIP = window.localStorage['IP'];
     console.log('ApiArduino:', DireccionIP);
+    
+    
     if (this.open == false) {
       this.websocket = new WebSocket(`ws://${DireccionIP}:81`);
 
@@ -32,7 +34,7 @@ export class ApiarduinoServiceService implements OnInit {
       };
     }
 
-    // Recibe los mensajes Y AL PARECER LOS ESCUCHA TAMBIEN
+    // Recibe los mensajes Y  LOS ESCUCHA TAMBIEN
     this.websocket.onmessage = (event1) => {
       console.log("mensaje Recibido:");
       console.log(event1.data);
@@ -43,8 +45,11 @@ export class ApiarduinoServiceService implements OnInit {
 
     // clausura la conexion
     this.websocket.onclose = (event) => {
-      console.log('close: ', event);
+      // SE CERRO LA CONEXION 
+      console.log('close: ', event);    
       this.open = false;
+      this.navCtrl.navigateForward('/tabs/tab1');
+      console.log ("cambio de pagina a tab1");
     }
   }
 
@@ -55,15 +60,15 @@ export class ApiarduinoServiceService implements OnInit {
     console.log('process_json:', messages);
 
     for (let dato of Object.values(messages)) {
-      //console.log('dato', dato);
+      console.log('dato', dato);
       for (let value of Object.values(dato)) {
-        //console.log('value', value);
+        console.log('value', value);
         for (let otro of Object.values(value)) {
-          // console.log('dato3', otro);
+          console.log('dato3', otro);
         }
 
         for (let nuevoFor of Object.values(this.chatMessages)) {
-          //console.log('nuevoFor', nuevoFor);
+          console.log('nuevoFor', nuevoFor);
           if (value.name === nuevoFor.name) {
             this.bandera = true;
           }
@@ -88,101 +93,35 @@ export class ApiarduinoServiceService implements OnInit {
     this.process_json();
 
     this.chatMessages.map(dato => {
+      console.log ('--------->name', dato.name);
       if (dato.name === ubicado) {
-
+        console.log (dato.name);
         dato.acciones.map(accion => {
+          
           if (accion.ID === eventoId) {
-            if (accion.status === "ON") {
-              accion.status = "OFF";
+            console.log ('--------->ID',accion.ID);
+            console.log ('--------->MAC', accion.MAC);
+            if (accion.status === "OFF") {
+              accion.status = "ON";
               this.activatedLED = false;
-
             }
             else {
-              accion.status = "ON";
+              accion.status = "OFF";
               this.activatedLED = true;
             }
-
           }
         }
         )
       }
-
       return dato;
     })
     
     console.log('chatmessagesOJO:', (this.chatMessages));
     this.websocket.send(JSON.stringify(this.chatMessages));
-
   }
 
   public closeWebsocket() {
-    this.websocket.close();
+    //this.websocket.close();
   }
-  /*
-  public ipdatoform(ip:string){
-    console.log('ipdesdedataform', ip);
-    this.IPdireccion = ip;
-    this.openWebsocket();
   
-  }*/
 }
-
-
-
-/* AHORA USAR ESTE JSON PARA CREAR LOS BOTONES
-{
-  "LUGARES": [
-    {
-      "name": "cocina",
-      "acciones": [
-        {
-          "ID": "LUZ",
-          "status": "OFF"
-        },
-        {
-          "ID": "VENTILADOR",
-          "status": "OFF"
-        },
-        {
-          "ID": "PERSIANA",
-          "status": "OFF"
-        }
-      ]
-    },
-    {
-      "name": "habitacion",
-      "acciones": [
-        {
-          "ID": "LUZ",
-          "status": "OFF"
-        },
-        {
-          "ID": "VENTILADOR",
-          "status": "OFF"
-        },
-        {
-          "ID": "PERSIANA",
-          "status": "OFF"
-        }
-      ]
-    },
-    {
-      "name": "garage",
-      "acciones": [
-        {
-          "ID": "LUZ",
-          "status": "OFF"
-        },
-        {
-          "ID": "VENTILADOR",
-          "status": "OFF"
-        },
-        {
-          "ID": "PERSIANA",
-          "status": "OFF"
-        }
-      ]
-    }
-  ]
-}
-*/

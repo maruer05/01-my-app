@@ -25,7 +25,7 @@ export class GaragePage implements OnInit, OnDestroy {
 
     for (let messagesChat1 of Object.values(this.variable)) {
 
-      if (messagesChat1.name === "garage") {
+      if (messagesChat1.name === "Garage") {
         this.bandera = true;
         for (let messagesChat2 of Object.values(messagesChat1.acciones)) {
           this.acciones.push(messagesChat2);

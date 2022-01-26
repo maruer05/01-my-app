@@ -22,7 +22,7 @@ export class HabitacionPage implements OnInit, OnDestroy {
     this.variable.map(resp => console.log(resp));
 
     for (let messagesChat1 of Object.values(this.variable)) {
-      if (messagesChat1.name === "habitacion") {
+      if (messagesChat1.name === "Habitación") {
         this.bandera = true;
         for (let messagesChat2 of Object.values(messagesChat1.acciones)) {
           this.acciones.push(messagesChat2);

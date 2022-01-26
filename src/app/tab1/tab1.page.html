@@ -5,22 +5,36 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding align-center" >
-<div class="ion-padding-top">
-  <form>
-    <ion-item>
-      <div>
-        <ion-label >Introducir IP:</ion-label>
-        <ion-input type="text" [(ngModel)]="ip" name="ip"  ></ion-input>
-      </div>
-    </ion-item>
 
-    <div class="ion-text-center ion-margin-top-20">
-      <ion-button type="submit" (click)="logform()" block [routerLink]="['/tabs/tab2']" routerLinkActive="router-link-active">
-         Save
-      </ion-button>
-    </div>
-    </form>
-</div>      
+  <ion-card>
+    <ion-card-header>
+      <ion-img src="../assets/icon/Logo.png"></ion-img>
+    </ion-card-header>
+  
+    <ion-card-content class="ion-padding-top">
+       Homeiot te permitirá el control total del encendido y apagado de los dispositivos electronicos de tu hogar, luego de su correcta configuración para comenzar a tener el control en tus dedos debe introducir aqui la dirección del servidor central mostrado en su página web.
+      <div class="ion-padding-top">
+        <form>
+          <ion-item>
+            <div class="ion-text-center ion-margin-top-20">
+                <ion-label>Introducir IP </ion-label>
+                <ion-input type="text" [(ngModel)]="ip" name="ip" placeholder="192.168.XXX.XXX" ></ion-input>     
+            </div>
+          </ion-item>
+      
+          <div class="ion-text-center ion-margin-top-20">
+            <ion-button type="submit" (click)="presentLoading()">
+               Siguiente...
+            </ion-button>
+          </div>
+          </form>
+      </div>    
+    </ion-card-content>
+  </ion-card>
+
+
+
+  
 </ion-content>
 
 

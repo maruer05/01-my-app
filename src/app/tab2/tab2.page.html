@@ -1,31 +1,35 @@
-<app-header titulo="Mi Hogar"></app-header>
-<ion-content>
-  
-<!--
-  <ion-icon name="bed-outline"> habitacion</ion-icon>
-  <ion-icon name="car-sport-outline"></ion-icon>Garage
-  <ion-icon name="cafe-outline">Cocina</ion-icon>
--->
 
+<ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Mi Hogar</ion-title>
+  </ion-toolbar>
+<ion-content>  
 <!--Esto es para que comience desde 1 el recorrido por json-->
+
+<ion-card>
+  <ion-grid>
+      <ion-row class="ion-text-center">
+          <ion-col size="6" routerLink="/page1" *ngFor="let y of websocketservice.chatMessages | slice:0; let i = index" [routerLink]="y.redirectTo" detail>
+              <ion-icon [name]="y.icon" color="primary" size="large"></ion-icon>
+              <p>{{y.name}}</p>
+          </ion-col>
+         
+      </ion-row>
+  </ion-grid>
+</ion-card>
+
+
+<!-- 
 <ion-list >
   <ion-item *ngFor="let y of websocketservice.chatMessages | slice:0; let i = index" [routerLink]="y.redirectTo" detail>
     <ion-icon [name]="y.icon" slot="start" color="primary"></ion-icon>
     {{y.name}}
   </ion-item>
 </ion-list>
-
-<!-- Botones
-<ion-list *ngFor="let y of websocketservice.chatMessages | slice:0; let i = index"> 
-    <ion-item>
-      <ion-label> 
-        Posición:{{i}}   
-        Disp:{{y.name}} 
-      </ion-label>
-      <ion-toggle id="{{y.name}}" (ionChange)="sendWebsocket($event)"> </ion-toggle>
-    </ion-item>       
-</ion-list>
-
 -->
 
 </ion-content>

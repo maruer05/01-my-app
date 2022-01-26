@@ -1,4 +1,6 @@
+import { Statement } from '@angular/compiler';
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +11,14 @@ export class HeaderComponent implements OnInit {
 
   @Input() titulo: string = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
 
   goBack(){
-    window.history.back();
+    //window.history.back();
+   
+    this.router.navigateByUrl('/tabs/tab2');
   }
 
 }
